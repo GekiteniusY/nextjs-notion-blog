@@ -1,5 +1,6 @@
+import { NotionDatabaseResponseResult } from '@/types/notion.type';
 import { Client } from '@notionhq/client';
-import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { GetPageResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { cache } from 'react';
 
 // Configure Database ID
@@ -16,7 +17,26 @@ export const getDatabase = cache(async (databaseId: string) => {
   return response.results;
 });
 
-export const getPage = cache(async (pageId: string) => {
+export const getPage = cache(async (pageId: string): Promise<GetPageResponse> => {
   const response = await notionClient.pages.retrieve({ page_id: pageId });
   return response;
+});
+
+// TODO: return typeを :Promise<NotionDatabaseResponseResult>にしたい
+export const getPageFromSlug = cache(async (databaseId: string, slug: string) => {
+  const response = await notionClient.databases.query({
+    database_id: databaseId,
+    filter: {
+      property: 'Slug',
+      formula: {
+        string: {
+          equals: slug,
+        },
+      },
+    },
+  });
+  if (response?.results?.length) {
+    return response?.results?.[0];
+  }
+  return {};
 });
