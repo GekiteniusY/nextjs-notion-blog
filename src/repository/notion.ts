@@ -10,9 +10,9 @@ const notionClient: Client = new Client({
   auth: process.env.NOTION_TOKEN,
 })
 
-export const getDatabase = cache(async (databaseId: string) => {
+export const getDatabase = cache(async () => {
   const response: QueryDatabaseResponse = await notionClient.databases.query({
-    database_id: databaseId,
+    database_id: DATABASE_1,
   });
   return response.results;
 });
@@ -23,9 +23,9 @@ export const getPage = cache(async (pageId: string): Promise<GetPageResponse> =>
 });
 
 // TODO: return typeを :Promise<NotionDatabaseResponseResult>にしたい
-export const getPageFromSlug = cache(async (databaseId: string, slug: string) => {
+export const getPageFromSlug = cache(async (slug: string, databaseId: string,) => {
   const response = await notionClient.databases.query({
-    database_id: databaseId,
+    database_id: DATABASE_1,
     filter: {
       property: 'Slug',
       formula: {

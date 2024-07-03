@@ -9,7 +9,7 @@ const DATABASE_1: string =
 
 async function getPosts(): Promise<NotionDatabaseResponseResult[]> {
   // TODO: ブログ記事の取得処理
-  const posts = await getDatabase(DATABASE_1);
+  const posts = await getDatabase();
 
   return posts;
 }
@@ -28,7 +28,11 @@ export default async function Home() {
       <div>
         {posts.map((post) => {
           const id = "sample_id";
+          // プロパティ 'properties' は型 'NotionDatabaseResponseResult' に存在しません　のエラーが出る
+          // const slug = post.properties?.Slug?.rich_text[0].text.content;
           const slug = "sample_slug";
+          // プロパティ 'properties' は型 'NotionDatabaseResponseResult' に存在しません　のエラーが出る
+          // const title = post.properties?.Title?.rich_text;
           const title = "sample_title";
           const date = "sample_date";
           const abstract = "";
