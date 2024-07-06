@@ -15,8 +15,7 @@ const notionClient: Client = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-//
-export const getDatabase = cache(async () => {
+export const getDatabase = cache(async (): Promise<PageObjectResponse[]> =>  {
   const response: PageObjectResponse[] = await notionClient.databases
     .query({
       database_id: DATABASE_1,
@@ -27,12 +26,13 @@ export const getDatabase = cache(async () => {
         if ("properties" in result) {
           // PageObjectResponse型のみ追加する
           items.push(result as PageObjectResponse);
+        } else {
+          throw new Error('getDatabase: result is not PageObjectResponse type\n')
         }
       });
       return items;
     });
-
-  return response;
+    return response;
 });
 
 export const getPage = cache(

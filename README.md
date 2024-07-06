@@ -2,6 +2,18 @@ This is a Simple Blog Application using [Next.js](https://nextjs.org/).
 
 This application is influenced this [samuelkraft's project](https://github.com/samuelkraft/notion-blog-nextjs).  
 
+## Purpose
+### Mobility
+PC, Mobile, Tablet
+
+
+### WYSIWYG
+What you see is what you get.
+
+## Week Point
+### DBスキーマが脆い
+
+
 ## Architecture
 Frontend: Next.js(React), TailwindCSS  
 Backend(Deploy): Github Pages or other static site hosting services  
