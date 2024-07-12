@@ -25,16 +25,16 @@ export function renderBlock(block: Block) {
     case "breadcrumb": {
       return <a></a>;
     }
-    case "bulleted_list_item":{
-      return <a></a>
+    case "bulleted_list_item": {
+      return <a></a>;
     }
     // https://extns.notion.site/d3d1b61749b942d592d69c9673ffb008
-    case "callout":{
-      return <a></a>
+    case "callout": {
+      return <a></a>;
     }
     // TODO: サポート必要？？？
-    case "child_database":{
-      return <a></a>
+    case "child_database": {
+      return <a></a>;
     }
     case "child_page":
       return (
@@ -55,12 +55,18 @@ export function renderBlock(block: Block) {
     case "column": {
       return <div></div>;
     }
-    case "paragraph":
+    case "divider":
+      return <hr />;
+    case "embed": {
+      return <div></div>;
+    }
+    case "file": {
       return (
-        <p>
-          <NotionText></NotionText>
-        </p>
+        <figure>
+          <div></div>
+        </figure>
       );
+    }
     case "heading_1":
       return (
         <h1>
@@ -79,6 +85,32 @@ export function renderBlock(block: Block) {
           <NotionText></NotionText>
         </h3>
       );
+    case "image": {
+      return (
+        <figure>
+          <img />
+          <figcaption></figcaption>
+        </figure>
+      );
+    }
+    case "link_preview": {
+      return <div></div>;
+    }
+    // ページのメンション
+    case "page": {
+      return <div></div>;
+    }
+    case "numbered_list_item":
+      return <li></li>;
+    case "paragraph":
+      return (
+        <p>
+          <NotionText></NotionText>
+        </p>
+      );
+    case "pdf": {
+      return <div></div>;
+    }
     // TODO: bulleted_listは存在しないのでは？？？
     case "bulleted_list": {
       return <ul></ul>;
@@ -88,8 +120,6 @@ export function renderBlock(block: Block) {
     }
     // TODO: 一緒の処理にするか後で検討する
     // case "bulleted_list_item":
-    case "numbered_list_item":
-      return <li></li>;
     case "to_do":
       return (
         <div>
@@ -104,25 +134,8 @@ export function renderBlock(block: Block) {
           <summary></summary>
         </details>
       );
-    case "image": {
-      return (
-        <figure>
-          <img />
-          <figcaption></figcaption>
-        </figure>
-      );
-    }
-    case "divider":
-      return <hr />;
     case "quote":
       return <blockquote></blockquote>;
-    case "file": {
-      return (
-        <figure>
-          <div></div>
-        </figure>
-      );
-    }
     case "table": {
       return (
         <table>
