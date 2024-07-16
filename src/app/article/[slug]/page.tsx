@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Text from '../../../component/notion-text';
 import Link from "next/link";
 
 export default async function Page({ }) {

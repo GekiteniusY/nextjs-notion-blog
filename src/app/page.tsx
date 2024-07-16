@@ -26,6 +26,7 @@ export default async function Home() {
           const id = "sample_id";
           const slug = properties.Slug;
           // console.debug('properties.Slug :', slug);
+          const text: RichTextItemResponse[] | null = slug.type === 'rich_text' ? slug.rich_text : null;
 
           // const slug: string | null =
           //   properties["Slug"].type === "rich_text"
@@ -34,23 +35,23 @@ export default async function Home() {
           //       : null
           //     : null;
 
-          let slug2: string | null = null;
-          if (properties.Slug.type === 'rich_text') {
-            // if (properties.Slug.rich_text[0].type === 'text') {
-            //   // console.debug('DEBUG slug2 :', properties.Slug.rich_text[0].text.content);
-            // } else{
-            //   slug2 = null;
-            // }
-            const rich_text = properties.Slug.rich_text[0] as TextRichTextItemResponse;
-            console.debug(rich_text);
+          // let slug2: string | null = null;
+          // if (properties.Slug.type === 'rich_text') {
+          //   // if (properties.Slug.rich_text[0].type === 'text') {
+          //   //   // console.debug('DEBUG slug2 :', properties.Slug.rich_text[0].text.content);
+          //   // } else{
+          //   //   slug2 = null;
+          //   // }
+          //   const rich_text = properties.Slug.rich_text[0] as TextRichTextItemResponse;
+          //   console.debug(rich_text);
 
 
-            // console.debug(obj);
-            slug2 = 'ok'
-          } else {
-            slug2 = null;
-          }
-          console.debug('slug2 :', slug2);
+          //   // console.debug(obj);
+          //   slug2 = 'ok'
+          // } else {
+          //   slug2 = null;
+          // }
+          // console.debug('slug2 :', slug2);
 
           // rich_text[0].text.content;
           // .rich_text[0].text.content;
