@@ -27,6 +27,30 @@ export default async function Home() {
           const slug = properties.Slug;
           // console.debug('properties.Slug :', slug);
           const text: RichTextItemResponse[] | null = slug.type === 'rich_text' ? slug.rich_text : null;
+          console.log('\n')
+          console.log('============================')
+          // console.log(text);
+          // if (text != null) {
+          //   const text2 = text![0] as TextRichTextItemResponse;
+          //   console.log(text2.type)
+          // }
+
+          // 以下のコードだと型の同定、プロパティへのアクセスが可能
+          if (text != null && text.length > 0) {
+            const text2 = text[0] as TextRichTextItemResponse;
+            if (text2 && text2.text) {
+                console.log(text2.plain_text);
+            } else {
+                console.log('text2 or text2.text is undefined');
+            }
+          } else {
+              console.log('text is null or empty');
+          }
+          console.log('============================')
+          // console.log(text?[0].toString() : null);
+          // const rich_text = text![0].type === 'text' ? text![0].text.content : 'dummy';
+          // console.log(rich_text);
+
 
           // const slug: string | null =
           //   properties["Slug"].type === "rich_text"
@@ -42,8 +66,7 @@ export default async function Home() {
           //   // } else{
           //   //   slug2 = null;
           //   // }
-          //   const rich_text = properties.Slug.rich_text[0] as TextRichTextItemResponse;
-          //   console.debug(rich_text);
+
 
 
           //   // console.debug(obj);
