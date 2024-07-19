@@ -36,48 +36,21 @@ export default async function Home() {
           // }
 
           // 以下のコードだと型の同定、プロパティへのアクセスが可能
+          let slugText: string;
           if (text != null && text.length > 0) {
-            const text2 = text[0] as TextRichTextItemResponse;
-            if (text2 && text2.text) {
-                console.log(text2.plain_text);
+            const slugText = text[0] as TextRichTextItemResponse;
+            if (slugText && slugText.text) {
+                console.log(slugText.plain_text);
             } else {
                 console.log('text2 or text2.text is undefined');
+                return;
             }
           } else {
               console.log('text is null or empty');
+              return;
           }
           console.log('============================')
-          // console.log(text?[0].toString() : null);
-          // const rich_text = text![0].type === 'text' ? text![0].text.content : 'dummy';
-          // console.log(rich_text);
 
-
-          // const slug: string | null =
-          //   properties["Slug"].type === "rich_text"
-          //     ? properties["Slug"].rich_text[0].type === "text"
-          //       ? properties["Slug"].rich_text[0].text.content
-          //       : null
-          //     : null;
-
-          // let slug2: string | null = null;
-          // if (properties.Slug.type === 'rich_text') {
-          //   // if (properties.Slug.rich_text[0].type === 'text') {
-          //   //   // console.debug('DEBUG slug2 :', properties.Slug.rich_text[0].text.content);
-          //   // } else{
-          //   //   slug2 = null;
-          //   // }
-
-
-
-          //   // console.debug(obj);
-          //   slug2 = 'ok'
-          // } else {
-          //   slug2 = null;
-          // }
-          // console.debug('slug2 :', slug2);
-
-          // rich_text[0].text.content;
-          // .rich_text[0].text.content;
 
           // プロパティ 'properties' は型 'NotionDatabaseResponseResult' に存在しません　のエラーが出る
           // const title = post.properties?.Title?.rich_text;
