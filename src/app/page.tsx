@@ -22,45 +22,86 @@ export default async function Home() {
       <div className="">Recent Posts</div>
       <div>
         {posts.map((post: PageObjectResponse) => {
-          const properties = post.properties;
+          let slugText: string = '';
           const id = "sample_id";
-          const slug = properties.Slug;
-          // console.debug('properties.Slug :', slug);
-          const text: RichTextItemResponse[] | null = slug.type === 'rich_text' ? slug.rich_text : null;
-          console.log('\n')
-          console.log('============================')
-          // console.log(text);
-          // if (text != null) {
-          //   const text2 = text![0] as TextRichTextItemResponse;
-          //   console.log(text2.type)
-          // }
-
-          // 以下のコードだと型の同定、プロパティへのアクセスが可能
-          let slugText: string;
-          if (text != null && text.length > 0) {
-            const slugText = text[0] as TextRichTextItemResponse;
-            if (slugText && slugText.text) {
-                console.log(slugText.plain_text);
-            } else {
-                console.log('text2 or text2.text is undefined');
-                return;
-            }
-          } else {
-              console.log('text is null or empty');
-              return;
-          }
-          console.log('============================')
-
-
-          // プロパティ 'properties' は型 'NotionDatabaseResponseResult' に存在しません　のエラーが出る
-          // const title = post.properties?.Title?.rich_text;
           const title = "sample_title";
           const date = "sample_date";
           const abstract = "";
 
+          const properties = post.properties;
+
+          // slugの設定
+          const slug = properties.Slug;
+          // console.debug('properties.Slug :', slug);
+          // properties.Slug : {
+          //   id: 'a%3COL',
+          //   type: 'rich_text',
+          //   rich_text: [
+          //     {
+          //       type: 'text',
+          //       text: [Object],
+          //       annotations: [Object],
+          //       plain_text: '20240613',
+          //       href: null
+          //     }
+          //   ]
+          // }
+
+          const richTextItemResponse: RichTextItemResponse[] | null = slug.type === 'rich_text' ? slug.rich_text : null;
+          // console.debug('RichTextItemResponse: ', richTextItemResponse);
+          // RichTextItemResponse:  [
+          //   {
+          //     type: 'text',
+          //     text: { content: '20240613', link: null },
+          //     annotations: {
+          //       bold: false,
+          //       italic: false,
+          //       strikethrough: false,
+          //       underline: false,
+          //       code: false,
+          //       color: 'default'
+          //     },
+          //     plain_text: '20240613',
+          //     href: null
+          //   }
+          // ]
+
+          console.log('\n')
+          console.log('============================')
+          // 以下のコードだと型の同定、プロパティへのアクセスが可能
+          if (richTextItemResponse != null && richTextItemResponse.length > 0) {
+            const textRichTextItemResponse = richTextItemResponse[0] as TextRichTextItemResponse;
+            // console.debug('textRichTextItemResponse: ', textRichTextItemResponse);
+            // textRichTextItemResponse:  {
+            //   type: 'text',
+            //   text: { content: '20240614', link: null },
+            //   annotations: {
+            //     bold: false,
+            //     italic: false,
+            //     strikethrough: false,
+            //     underline: false,
+            //     code: false,
+            //     color: 'default'
+            //   },
+            //   plain_text: '20240614',
+            //   href: null
+            // }
+
+            if (textRichTextItemResponse && textRichTextItemResponse.text) {
+              console.log(textRichTextItemResponse.plain_text);
+              slugText = textRichTextItemResponse.plain_text;
+            } else {
+              console.log('text2 or text2.text is undefined');
+              return;
+            }
+          } else {
+            console.log('text is null or empty');
+            return;
+          }
+
           return (
             <li key={id} className="">
-              <Link href={`/article/${slug}`}>
+              <Link href={`/article/${slugText}`}>
                 {/* title */}
                 <h3 className="">{title}</h3>
                 {/* date */}
@@ -70,6 +111,7 @@ export default async function Home() {
               </Link>
             </li>
           );
+
         })}
       </div>
     </main>
