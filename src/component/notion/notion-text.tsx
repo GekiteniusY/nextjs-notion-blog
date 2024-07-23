@@ -1,7 +1,7 @@
 // ブロックのテキストを解釈して表示するコンポーネント
 
 // TODO: titleの型付け
-export default function NotionText({ title }:any) {
+export default function NotionText({ title }: any) {
   if (!title) {
     return null;
   }
@@ -16,13 +16,13 @@ export default function NotionText({ title }:any) {
     } = value;
     return (
       <span
-        // className={[
-        //   bold ? styles.bold : '',
-        //   code ? styles.code : '',
-        //   italic ? styles.italic : '',
-        //   strikethrough ? styles.strikethrough : '',
-        //   underline ? styles.underline : '',
-        // ].join(' ')}
+        className={[
+          bold ? 'bold' : '', // TODO: boldの指定
+          code ? 'code' : '', // TODO: codeの指定
+          italic ? 'italic' : '', // TODO: italicの指定
+          strikethrough ? 'strikethrough' : '', // TODO: strikethroughの指定
+          underline ? 'underline' : '', // TODO: underlineの指定
+        ].join(' ')}
         style={color !== 'default' ? { color } : {}}
         key={text.content}
       >
