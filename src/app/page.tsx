@@ -19,16 +19,18 @@ export default async function Home() {
       <header></header>
       <h2 className="font-bold">Home Page Title</h2>
       <TopPageContents />
+      <div className="">Social Account</div>
       <div className="">Recent Posts</div>
       <div>
         {posts.map((post: PageObjectResponse) => {
-          let slugText: string = '';
-          const id = "sample_id";
+          let slugText: string;
           const title = "sample_title";
           const date = "sample_date";
           const abstract = "";
 
           const properties = post.properties;
+          const id = post.id;
+          console.debug('id: ', id);
 
           // slugの設定
           const slug = properties.Slug;
