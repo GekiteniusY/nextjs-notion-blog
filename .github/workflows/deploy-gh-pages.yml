@@ -76,12 +76,14 @@ jobs:
 
       # 依存関係をインストール
       - name: Install dependencies
+        # Context access might be invalid: NOTION_TOKENと警告が出てしまう
         run: |
           echo "NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}"
           echo "NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}"
           ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       # 環境変数を設定してNext.jsをビルド
       - name: Build with Next.js
+        # Context access might be invalid: NOTION_TOKENと警告が出てしまう
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
