@@ -20,7 +20,7 @@ const Dialog = (dialog: Dialog) => {
                   <div className="self-stretch text-[#1e1e1e] text-2xl font-semibold font-['Inter'] leading-7">{dialog.title}</div>
                   <div className="self-stretch text-[#1e1e1e] text-base font-normal font-['Inter'] leading-snug">{dialog.body}</div>
               </div>
-              <div className="self-stretch justify-end items-center gap-4 inline-flex">
+              <div className="self-stretch justify-end items-center gap-4 inline-flex">｀
                   <div className="p-3 bg-[#e3e3e3] rounded-lg border border-[#767676] justify-center items-center gap-2 flex">
                       <div className="text-[#1e1e1e] text-base font-normal font-['Inter'] leading-none">{dialog.button_a}</div>
                   </div>
